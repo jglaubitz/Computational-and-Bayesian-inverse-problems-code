@@ -1,0 +1,11 @@
+# Course code, project starter code, and tests (Python >= 3.10). No GPU needed: `pip install jax` installs the CPU version.
+numpy>=2.0
+scipy>=1.11
+matplotlib>=3.7
+jax>=0.4.30
+# scikit-image: only for the CT figure of Chapter 1 (ch01_figures.py skips ct.pdf without it, and the later random
+# draws of that script then differ from the notes)
+scikit-image>=0.21
+pytest>=7.0
+# Optional, only for the NUTS cross-check in course_code/ch04_figures.py (skipped if missing):
+#   pip install blackjax

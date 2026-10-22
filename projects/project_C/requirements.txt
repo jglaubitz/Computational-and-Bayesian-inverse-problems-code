@@ -1,0 +1,5 @@
+numpy
+scipy
+matplotlib
+# optional, for flume.forward_jax:
+# jax

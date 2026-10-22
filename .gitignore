@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# generated figures of the lecture notes (written by course_code/*_figures.py and *_landscape.py);
+# only the empty output folders are tracked
+/figures/*/*
+!/figures/*/.gitkeep
+
+# overview figures written by projects/project_*/generate_data.py (to projects/figures/)
+/projects/figures/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*~
