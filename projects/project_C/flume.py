@@ -43,16 +43,16 @@ def bottom_hill(x):
     return 0.20 * np.exp(-((x - 4.0) ** 2) / 0.05)
 
 
-def bottom_box(x):
-    """Piecewise constant: a box of the same height and cross-section as the hill (0.2 m on (3.8, 4.2]) and a lower,
-    wider step (0.06 m on (6.0, 6.8]) between the third and the fourth sensor."""
+def bottom_boxes(x):
+    """Piecewise constant: two boxes, 0.15 m high on (3.6, 4.8] (where the hill is) and 0.08 m high on (6.1, 7.3]
+    (between the third and the fourth sensor). Both are 1.2 m wide, i.e., about six nodes for n = 64."""
     b = np.zeros_like(x, dtype=float)
-    b[(x > 3.8) & (x <= 4.2)] = 0.20
-    b[(x > 6.0) & (x <= 6.8)] = 0.06
+    b[(x > 3.6) & (x <= 4.8)] = 0.15
+    b[(x > 6.1) & (x <= 7.3)] = 0.08
     return b
 
 
-BATHYMETRIES = {"hill": bottom_hill, "box": bottom_box}
+BATHYMETRIES = {"hill": bottom_hill, "boxes": bottom_boxes}
 
 
 def eta_left_synthetic(t):

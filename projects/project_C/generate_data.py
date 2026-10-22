@@ -12,7 +12,7 @@ commits no inverse crime. The truth is stored on a fine grid and on the n = 100 
 
 Target (time-dependent flume flow, finite-volume forward model of flume.py), two bathymetries:
     data/flume_hill.npz    smooth Gaussian hill (height 0.2 m at x = 4 m), the shape of the TUHH experiment
-    data/flume_box.npz     piecewise constant: a box of the same height and cross-section, plus a lower step
+    data/flume_boxes.npz   piecewise constant: two boxes (0.15 m on (3.6, 4.8] m, 0.08 m on (6.1, 7.3] m)
 Synthetic wave maker eta(1.5 m, t) = H0 + 0.02 sin(2 pi t / 2.5 s) (switched on over one period), still-water
 depth H0 = 0.4 m, friction kappa = 0.2, sensors at x = 3.5, 5.5, 7.5 m sampled at 100 Hz for 10 s (3000 data),
 noise 5 % of the wave amplitude (1 mm), as in Stietz et al. (2026). The data are generated on N = 2160 cells
@@ -116,17 +116,17 @@ def main():
             ax = axs[1, 0]
             xf = np.linspace(flume.X_L, 9.0, 1500)
             ax.fill_between(xf, 0, flume.bottom_hill(xf), color="0.75", lw=0, label="hill")
-            ax.plot(xf, flume.bottom_box(xf), "-", color="k", lw=1.0, label="box")
+            ax.plot(xf, flume.bottom_boxes(xf), "-", color="k", lw=1.0, label="two boxes")
             ax.axhline(flume.H0, color="tab:blue", lw=1.2, label="still water $H_0$")
             for xs, lab in zip(np.concatenate([[flume.X_L], flume.SENSORS]), ["$s_1$ (BC)", "$s_2$", "$s_3$", "$s_4$"]):
                 ax.plot([xs, xs], [0, flume.H0 + 0.05], ":", color="tab:red", lw=1.0)
                 ax.text(xs, flume.H0 + 0.065, lab, color="tab:red", fontsize=6.5, ha="center")
             ax.set_xlim(1.0, 9.0)
-            ax.set_ylim(0, flume.H0 + 0.12)
+            ax.set_ylim(0, flume.H0 + 0.2)
             ax.set_xlabel("$x$ [m]")
             ax.set_ylabel("elevation [m]")
             ax.set_title("(c) flume: bathymetries and sensors")
-            ax.legend(frameon=False, fontsize=7, loc="center right")
+            ax.legend(frameon=False, fontsize=6.5, loc="upper center", ncol=3, columnspacing=1.0, handlelength=1.6)
             ax = axs[1, 1]
             tt = times
             sel = (tt >= 3.0) & (tt <= 6.5)
@@ -135,7 +135,7 @@ def main():
             ax.plot(tt[sel][::3], (d["eta_obs"][sel, j][::3] - flume.H0) * 1e3, ".", color="tab:red", ms=2.0, label="noisy data (hill)")
             ax.plot(tt[sel], (flume_rec["flat"][sel, j] - flume.H0) * 1e3, "-", color="0.6", lw=1.0, label="flat floor")
             ax.plot(tt[sel], (flume_rec["hill"][sel, j] - flume.H0) * 1e3, "-", color="tab:blue", lw=1.2, label="hill")
-            ax.plot(tt[sel], (flume_rec["box"][sel, j] - flume.H0) * 1e3, "--", color="k", lw=1.0, label="box")
+            ax.plot(tt[sel], (flume_rec["boxes"][sel, j] - flume.H0) * 1e3, "--", color="k", lw=1.0, label="two boxes")
             ax.set_xlabel("$t$ [s]")
             ax.set_ylabel("$\\eta - H_0$ at $x = 7.5$ m [mm]")
             ax.set_ylim(-16, 22)

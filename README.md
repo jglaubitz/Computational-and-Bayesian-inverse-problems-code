@@ -103,7 +103,7 @@ The starter code contains forward models, priors, and data, but no inference cod
 |---|---|---|
 | A: variational Bayes for sparsity-promoting hierarchical models | `hyperpriors.py` (inverse gamma, gamma, generalized gamma, half-Cauchy hyper-priors), `model.py` (log densities, prior normalization), `burgers.py`, `burgers_jax.py` (Godunov solver for the inviscid Burgers equation) | deconvolution (linear), Burgers (nonlinear) |
 | B: Bayesian atom-conserving chemical reaction neural networks | `acrnn.py` (atom-conservation basis, mass-action CRNN, ODE solves with SciPy) | trimerization: standard, scarce, and noisy data sets |
-| C: Bayesian bathymetry inference from shallow-water data | `swe.py` (steady states, well-balanced finite volumes), `flume.py` (wave flume, NumPy and JAX), `priors.py` | steady channel (dense, sparse sensors); flume (hill, box) |
+| C: Bayesian bathymetry inference from shallow-water data | `swe.py` (steady states, well-balanced finite volumes), `flume.py` (wave flume, NumPy and JAX), `priors.py` | steady channel (dense, sparse sensors); flume (hill, two boxes) |
 
 Work inside the project folder, e.g.,
 
